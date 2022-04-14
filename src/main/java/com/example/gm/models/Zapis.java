@@ -7,17 +7,17 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "doctor")
+@Table(name = "zapis")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Doctor {
+public class Zapis {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
-    @Column(name = "name")
-    private String name;
-    @Column(name = "surname")
-    private String surname;
+    @Column(name = "date")
+    private String date;
+    @Column(name = "time")
+    private String time;
 }
