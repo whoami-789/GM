@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "doctor")
@@ -20,4 +22,10 @@ public class Doctor {
     private String name;
     @Column(name = "surname")
     private String surname;
+
+    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "idD")
+    private List<Result> resultD = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "idZ")
+    private List<Result> resultZ = new ArrayList<>();
 }
