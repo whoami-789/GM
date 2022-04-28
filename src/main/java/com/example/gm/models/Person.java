@@ -29,9 +29,4 @@ public class Person {
 
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy="idP")
     private List<Zapis> zapisP = new ArrayList<>();
-
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-    @JoinColumn(name = "idR")
-    private Roles idR;
-
 }

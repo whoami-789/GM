@@ -20,10 +20,4 @@ public class Registrator {
     private String name;
     @Column(name = "surname")
     private String surname;
-
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-    @JoinColumn(name = "idReg")
-    private Roles idReg;
-
-
 }
