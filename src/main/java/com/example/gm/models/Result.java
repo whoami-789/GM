@@ -28,9 +28,4 @@ public class Result {
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinColumn(name = "idZ")
     private Zapis idZ;
-
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-    @JoinColumn(name = "idD")
-    private Doctor idD;
-
 }

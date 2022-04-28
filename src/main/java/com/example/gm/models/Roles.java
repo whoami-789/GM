@@ -20,13 +20,4 @@ public class Roles {
     private Long id;
     @Column(name = "role")
     private String role;
-
-    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy="idR")
-    private List<Person> person = new ArrayList<>();
-
-    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy="idr")
-    private List<Doctor> doctor = new ArrayList<>();
-
-    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy="idReg")
-    private List<Registrator> reg = new ArrayList<>();
 }

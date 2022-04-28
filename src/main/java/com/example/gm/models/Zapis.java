@@ -24,10 +24,6 @@ public class Zapis {
     private String time;
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-    @JoinColumn(name = "idP")
-    private Person idP;
-
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinColumn(name = "idC")
     private Category idC;
 
