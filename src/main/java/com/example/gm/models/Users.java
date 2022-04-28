@@ -38,4 +38,14 @@ public class Users {
     @Enumerated(EnumType.STRING)
     @JoinTable
     private Set<Roles> roles = new HashSet<>();
+
+    public boolean isAdmin() {
+        return roles.contains(Roles.ADMIN);
+    }
+    public boolean isDoctor() {
+        return roles.contains(Roles.DOCTOR);
+    }
+    public boolean isPerson() {
+        return roles.contains(Roles.PERSON);
+    }
 }
