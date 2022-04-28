@@ -1,6 +1,5 @@
 package com.example.gm.models;
 
-import com.example.gm.models.enums.Roles;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,10 +31,7 @@ public class Doctor {
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "idZ")
     private List<Result> resultZ = new ArrayList<>();
 
-    @ElementCollection(targetClass = Roles.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"))
-    @Enumerated(EnumType.STRING)
-    @JoinTable
-    private Set<Roles> roles = new HashSet<>();
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @JoinColumn(name = "idr")
+    private Roles idr;
 }
