@@ -6,7 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -38,6 +40,9 @@ public class Users {
     @Enumerated(EnumType.STRING)
     @JoinTable
     private Set<Roles> roles = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy="idU")
+    private List<Zapis> zapisU = new ArrayList<>();
 
     public boolean isAdmin() {
         return roles.contains(Roles.ADMIN);
