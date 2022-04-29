@@ -29,8 +29,8 @@ public class Users {
     private String bdate;
     @Column(name = "phoneNumber")
     private String phoneNumber;
-    @Column(name = "login")
-    private String login;
+    @Column(name = "email")
+    private String email;
     @Column(name = "pass")
     private String password;
 
