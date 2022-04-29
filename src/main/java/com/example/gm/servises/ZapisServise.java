@@ -1,7 +1,7 @@
 package com.example.gm.servises;
 
 import com.example.gm.models.Category;
-import com.example.gm.models.Users;
+import com.example.gm.models.User;
 import com.example.gm.models.Zapis;
 import com.example.gm.repositories.CategoryRepository;
 import com.example.gm.repositories.UserRepository;
@@ -22,19 +22,27 @@ public class ZapisServise {
     private final CategoryRepository categoryRepository;
     private final UserRepository userRepository;
 
-    public List<Zapis> zapisList(String title){
-        if (title != null) return zapisRepository.findByTitle(title);
+    public List<Zapis> zapisList(String id){
+        if (id != null) return zapisRepository.findById(id);
         return zapisRepository.findAll();
     }
 
-    public List<Category> categoryList(String catname){
-        if (catname != null) return categoryRepository.findByTitle(catname);
+    public List<Category> categoryList(String title){
+        if (title != null) return categoryRepository.findByTitle(title);
         return categoryRepository.findAll();
     }
 
-    public Users getUsersByPrincipal(Principal principal){
-        if(principal == null) return new Users();
+    public User getUsersByPrincipal(Principal principal){
+        if(principal == null) return new User();
         return userRepository.findByEmail(principal.getName());
     }
 
+    public List<User> userslist(String name){
+        if (name != null) return userRepository.findByName(name);
+        return userRepository.findAll();
+    }
+
+/*    public void saveZap(User user, Zapis zapis, Category category){
+        zapis.setUser(getUserByName(name));
+    }*/
 }

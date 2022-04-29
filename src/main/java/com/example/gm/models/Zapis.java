@@ -28,8 +28,8 @@ public class Zapis {
     private Category idC;
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-    @JoinColumn(name = "idU")
-    private Users idU;
+    @JoinColumn
+    private User user;
 
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "idZ")
     private List<Result> result = new ArrayList<>();

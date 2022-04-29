@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ZapisRepository extends JpaRepository<Zapis, Long> {
-    List<Zapis> findByTitle(String title);
+    List<Zapis> findById(String id);
 }

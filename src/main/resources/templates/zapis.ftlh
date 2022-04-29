@@ -24,7 +24,11 @@
         Поиск варианта обследования: <input type="text" name="title">
                                      <input type="submit" value="Поиск">
     </form>
-    <#list
+    <#list catname as category>
+        <div>
+            <p><b>${category.title}</b> ${category.price} сум. | <a href="/zapis/zapform">Записаться</a></p>
+        </div>
+    </#list>
 </form>
 </body>
 </html>

@@ -1,8 +1,12 @@
 package com.example.gm.repositories;
 
-import com.example.gm.models.Users;
+import com.example.gm.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<Users, Long> {
-    Users findByEmail(String email);
+import java.util.List;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+    User findByEmail(String email);
+
+    List<User> findByName(String name);
 }
