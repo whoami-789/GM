@@ -1,6 +1,5 @@
 package com.example.gm.controllers;
 
-import com.example.gm.models.Category;
 import com.example.gm.models.Zapis;
 import com.example.gm.servises.ZapisServise;
 import lombok.RequiredArgsConstructor;
@@ -27,18 +26,16 @@ public class ZapisController {
         return "zapis";
     }
 
-    @GetMapping("/zapis/zapform")
-    public String zapisform(@RequestParam(name = "id", required = false) String id, @RequestParam(name = "catname", required = false) String catname,
-                            @RequestParam(name = "name", required = false) String name, Model model){
+    @GetMapping("/zapis/zapform/{title}")
+    public String zapisform(@RequestParam(name = "id", required = false) String id, @PathVariable String title, Principal principal, Model model){
         model.addAttribute("zapis", zapisServise.zapisList(id));
-        model.addAttribute("catname", zapisServise.categoryList(catname));
-        model.addAttribute("users", zapisServise.userslist(name));
+        model.addAttribute("catname", zapisServise.categoryList(title));
+        model.addAttribute("users", zapisServise.getUsersByPrincipal(principal));
         return "zapform";
     }
 
     @PostMapping("/zapis/zapform/save")
-    public String saveZap(@RequestParam(name = "name") String name, @RequestParam(name = "surname") String surname,
-                          @RequestParam(name = "bdate") String bdate, @RequestParam(name = "phoneNumber") String phoneNumber, Zapis zapis, Controller controller){
+    public String saveZap(Principal principal, Zapis zapis, Controller controller){
         return "redirect:/";
     }
 }

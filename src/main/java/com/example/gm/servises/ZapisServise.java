@@ -37,12 +37,12 @@ public class ZapisServise {
         return userRepository.findByEmail(principal.getName());
     }
 
-    public List<User> userslist(String name){
+/*    public List<User> userslist(String name){
         if (name != null) return userRepository.findByName(name);
         return userRepository.findAll();
-    }
-
-/*    public void saveZap(User user, Zapis zapis, Category category){
-        zapis.setUser(getUserByName(name));
     }*/
+
+    public void saveZap(Principal principal, Zapis zapis, Category category){
+        zapis.setIdU(getUsersByPrincipal(principal));
+    }
 }

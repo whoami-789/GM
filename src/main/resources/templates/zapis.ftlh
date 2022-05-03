@@ -26,7 +26,7 @@
     </form>
     <#list catname as category>
         <div>
-            <p><b>${category.title}</b> ${category.price} сум. | <a href="/zapis/zapform">Записаться</a></p>
+            <p><b>${category.title}</b> ${category.price} сум. | <a href="/zapis/zapform/${category.title}">Записаться</a></p>
         </div>
     </#list>
 </form>
