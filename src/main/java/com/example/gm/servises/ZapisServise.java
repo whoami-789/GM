@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
@@ -37,12 +38,15 @@ public class ZapisServise {
         return userRepository.findByEmail(principal.getName());
     }
 
-/*    public List<User> userslist(String name){
+   /* public List<User> userslist(String name){
         if (name != null) return userRepository.findByName(name);
         return userRepository.findAll();
     }*/
 
-    public void saveZap(Principal principal, Zapis zapis, Category category){
-        zapis.setIdU(getUsersByPrincipal(principal));
+    public void saveZap(Principal principal, Zapis zapis, Category category) throws IOException {
+        Zapis zapFromDB = zapisRepository.save(zapis);
+        userRepository.save(getUsersByPrincipal(principal));
+        zapFromDB.setIdC(zapFromDB.getIdC());
+        zapisRepository.save(zapis);
     }
 }

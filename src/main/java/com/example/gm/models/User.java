@@ -41,9 +41,8 @@ public class User {
     @JoinTable
     private Set<Roles> roles = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy="idU")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy="idU")
     private List<Zapis> zapisU = new ArrayList<>();
-
     public boolean isAdmin() {
         return roles.contains(Roles.ADMIN);
     }

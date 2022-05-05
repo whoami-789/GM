@@ -1,5 +1,7 @@
 package com.example.gm.controllers;
 
+import com.example.gm.models.Category;
+import com.example.gm.models.User;
 import com.example.gm.models.Zapis;
 import com.example.gm.servises.ZapisServise;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.IOException;
 import java.security.Principal;
 
 @Controller
@@ -35,7 +38,8 @@ public class ZapisController {
     }
 
     @PostMapping("/zapis/zapform/save")
-    public String saveZap(Principal principal, Zapis zapis, Controller controller){
+    public String saveZap(Principal principal, Zapis zapis, Category category) throws IOException {
+        zapisServise.saveZap(principal, zapis, category);
         return "redirect:/";
     }
 }

@@ -1,16 +1,14 @@
 package com.example.gm.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "zapis")
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Zapis {
@@ -27,10 +25,11 @@ public class Zapis {
     @JoinColumn(name = "idC")
     private Category idC;
 
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "idU")
     private User idU;
 
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "idZ")
     private List<Result> result = new ArrayList<>();
+
 }
