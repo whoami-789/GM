@@ -6,7 +6,7 @@
 <body>
 <h1>Заполните данные о себе</h1>
 
-<form action="/zapis/zapform/save" method="post" enctype="multipart/form-data">
+<form action="/zapis/zapform/save" method="post">
     Имя: <input type="text" name="name"/><br><br>
     Фамилия: <input type="text" name="surname"/><br><br>
     Дата рождения: <input type="date" name="bdate"/><br><br>

@@ -1,19 +1,15 @@
 package com.example.gm.models;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "result")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Result {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
     @Column(name = "name")
@@ -28,4 +24,15 @@ public class Result {
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinColumn(name = "idZ")
     private Zapis idZ;
+
+    public Result(String name, Long size, String contentType, byte[] bytes, Zapis idZ) {
+        this.name = name;
+        this.size = size;
+        this.contentType = contentType;
+        this.bytes = bytes;
+        this.idZ = idZ;
+    }
+
+    public Result() {
+    }
 }

@@ -21,25 +21,23 @@ public class ZapisController {
     private final ZapisServise zapisServise;
 
     @GetMapping("/")
-    public String zapis(@RequestParam(name = "id", required = false) String id, @RequestParam(name = "catname", required = false) String catname,
-                        Principal principal, Model model) {
+    public String zapis(@RequestParam(name = "id", required = false) String id, @RequestParam(name = "catname", required = false) String catname, Model model) {
         model.addAttribute("zapis", zapisServise.zapisList(id));
         model.addAttribute("catname", zapisServise.categoryList(catname));
-        model.addAttribute("users", zapisServise.getUsersByPrincipal(principal));
         return "zapis";
     }
 
     @GetMapping("/zapis/zapform/{title}")
-    public String zapisform(@RequestParam(name = "id", required = false) String id, @PathVariable String title, Principal principal, Model model){
+    public String zapisform(@RequestParam(name = "id", required = false) String id, @RequestParam(name = "email", required = false) String email, @PathVariable String title, Model model){
         model.addAttribute("zapis", zapisServise.zapisList(id));
         model.addAttribute("catname", zapisServise.categoryList(title));
-        model.addAttribute("users", zapisServise.getUsersByPrincipal(principal));
+        model.addAttribute("users", zapisServise.userslist(email));
         return "zapform";
     }
 
     @PostMapping("/zapis/zapform/save")
-    public String saveZap(Principal principal, Zapis zapis, Category category) throws IOException {
-        zapisServise.saveZap(principal, zapis, category);
+    public String saveZap(User user, Zapis zapis) throws IOException {
+        zapisServise.saveZap(user, zapis);
         return "redirect:/";
     }
 }
