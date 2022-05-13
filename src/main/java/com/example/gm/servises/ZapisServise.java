@@ -45,6 +45,8 @@ public class ZapisServise {
     public void saveZap(User user, Zapis zapis){
         userRepository.save(user);
         zapisRepository.save(zapis);
-        //zapisRepository.save();
+/*
+        zapisRepository.save();
+*/
     }
 }
