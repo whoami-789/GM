@@ -1,6 +1,8 @@
 package com.example.gm.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -9,6 +11,8 @@ import java.util.List;
 @Entity
 @Table(name = "category")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,16 +23,7 @@ public class Category {
     @Column(name = "price")
     private int price;
 
-    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy="idC")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy="idC")
     private List<Zapis> zapisC = new ArrayList<>();
 
-    public Category(Long id, String title, int price, List<Zapis> zapisC) {
-        this.id = id;
-        this.title = title;
-        this.price = price;
-        this.zapisC = zapisC;
-    }
-
-    public Category() {
-    }
 }
