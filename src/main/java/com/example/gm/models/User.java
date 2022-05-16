@@ -2,8 +2,11 @@ package com.example.gm.models;
 
 import com.example.gm.models.enums.Roles;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,7 +16,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -28,8 +31,18 @@ public class User {
     private String phoneNumber;
     @Column(name = "email", unique = true)
     private String email;
-    @Column(name = "pass")
+    @Column(name = "password")
     private String password;
+
+    @Transient
+    private Collection<? extends GrantedAuthority> authorities;
+
+    public User(Long id, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.authorities = authorities;
+    }
 
     @ElementCollection(targetClass = Roles.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role",
@@ -51,4 +64,32 @@ public class User {
         return roles.contains(Roles.PERSON);
     }
 
+    @Override
+    public String getPassword(){
+        return password;
+    }
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
