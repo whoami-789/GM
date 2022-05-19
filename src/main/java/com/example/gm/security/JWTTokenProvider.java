@@ -2,18 +2,14 @@ package com.example.gm.security;
 
 import com.example.gm.models.User;
 import io.jsonwebtoken.*;
-import lombok.extern.java.Log;
-import org.apache.tomcat.util.http.parser.Authorization;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
-import java.security.SignatureException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 @Component
 public class JWTTokenProvider {
