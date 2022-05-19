@@ -1,7 +1,6 @@
 package com.example.gm.payload.request;
 
 import lombok.Data;
-import org.jetbrains.annotations.NotNull;
 
 import javax.validation.constraints.NotEmpty;
 
