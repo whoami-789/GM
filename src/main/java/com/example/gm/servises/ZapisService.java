@@ -16,7 +16,7 @@ import java.util.Optional;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class ZapisServise {
+public class ZapisService {
     private final ZapisRepository zapisRepository;
 
     private final CategoryRepository categoryRepository;

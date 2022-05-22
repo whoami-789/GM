@@ -1,9 +1,8 @@
 package com.example.gm.controllers;
 
-import com.example.gm.models.Category;
 import com.example.gm.models.User;
 import com.example.gm.models.Zapis;
-import com.example.gm.servises.ZapisServise;
+import com.example.gm.servises.ZapisService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,12 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
-import java.security.Principal;
 
 @Controller
 @RequiredArgsConstructor
 public class ZapisController {
-    private final ZapisServise zapisServise;
+    private final ZapisService zapisServise;
 
     @GetMapping("/")
     public String zapis(@RequestParam(name = "id", required = false) Long id, @RequestParam(name = "catname", required = false) String catname, Model model) {

@@ -29,6 +29,9 @@ public class SignUpRequest {
     @NotEmpty(message = "Please enter your birth date")
     private String bdate;
 
+    @NotEmpty(message = "Please enter your birth date")
+    private String phoneNumber;
+
     @NotEmpty(message = "Please enter your password")
     @Size(min = 6)
     private String password;
