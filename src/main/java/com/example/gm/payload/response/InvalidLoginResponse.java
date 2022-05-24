@@ -9,7 +9,7 @@ public class InvalidLoginResponse {
     private String password;
 
     public InvalidLoginResponse() {
-        this.email = "invalid Username";
+        this.email = "invalid email";
         this.password = "invalid Password";
     }
 }

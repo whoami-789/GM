@@ -13,7 +13,7 @@ import java.lang.annotation.*;
 public @interface ValidEmail {
     String message() default "invalid email";
 
-    Class<?>[] groups() default{};
+    Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
 }

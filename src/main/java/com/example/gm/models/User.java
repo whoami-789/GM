@@ -21,10 +21,12 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
-    @Column(name = "surname")
+    @Column(name = "surname", nullable = false)
     private String surname;
+  /*  @Column(name = "username", nullable = false, unique = true)
+    private String username;*/
     @Column(name = "bdate")
     private String bdate;
     @Column(name = "phoneNumber", unique = true)
@@ -37,8 +39,9 @@ public class User implements UserDetails {
     @Transient
     private Collection<? extends GrantedAuthority> authorities;
 
-    public User(Long id, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    public User(Long id, /*String username,*/ String email, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
+        //this.username = username;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
@@ -51,23 +54,14 @@ public class User implements UserDetails {
     @JoinTable
     private Set<Roles> roles = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy="idU")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "idU")
     private List<Zapis> zapisU;
 
-    public boolean isAdmin() {
-        return roles.contains(Roles.ADMIN);
-    }
-    public boolean isDoctor() {
-        return roles.contains(Roles.DOCTOR);
-    }
-    public boolean isPerson() {
-        return roles.contains(Roles.PERSON);
-    }
-
     @Override
-    public String getPassword(){
+    public String getPassword() {
         return password;
     }
+
     @Override
     public String getUsername() {
         return null;

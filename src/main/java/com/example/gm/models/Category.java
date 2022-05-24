@@ -23,7 +23,7 @@ public class Category {
     @Column(name = "price")
     private int price;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy="idC")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "idC")
     private List<Zapis> zapisC = new ArrayList<>();
 
 }

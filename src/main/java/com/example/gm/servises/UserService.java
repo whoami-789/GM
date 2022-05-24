@@ -24,7 +24,7 @@ public class UserService {
         this.passwordEncoder = bCryptPasswordEncoder;
     }
 
-    public User createUser(SignUpRequest userIn){
+    public User createUser(SignUpRequest userIn) {
         User user = new User();
         user.setEmail(userIn.getEmail());
         user.setName(userIn.getName());
@@ -37,7 +37,7 @@ public class UserService {
         try {
             LOG.info("Saving user {}", userIn.getEmail());
             return userRepository.save(user);
-        } catch (Exception e){
+        } catch (Exception e) {
             LOG.error("Error during registration {}", e.getMessage());
             throw new UserExistExeption("User" + user.getEmail() + "already exists, please enter another email");
         }
