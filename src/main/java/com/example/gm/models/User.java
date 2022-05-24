@@ -25,8 +25,6 @@ public class User implements UserDetails {
     private String name;
     @Column(name = "surname", nullable = false)
     private String surname;
-  /*  @Column(name = "username", nullable = false, unique = true)
-    private String username;*/
     @Column(name = "bdate")
     private String bdate;
     @Column(name = "phoneNumber", unique = true)
@@ -54,7 +52,7 @@ public class User implements UserDetails {
     @JoinTable
     private Set<Roles> roles = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "idU")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     private List<Zapis> zapisU;
 
     @Override

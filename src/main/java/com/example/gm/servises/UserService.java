@@ -1,5 +1,6 @@
 package com.example.gm.servises;
 
+import com.example.gm.dto.UserDTO;
 import com.example.gm.exeptions.UserExistExeption;
 import com.example.gm.models.User;
 import com.example.gm.models.enums.Roles;
@@ -8,8 +9,11 @@ import com.example.gm.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.security.Principal;
 
 @Service
 public class UserService {
@@ -41,5 +45,25 @@ public class UserService {
             LOG.error("Error during registration {}", e.getMessage());
             throw new UserExistExeption("User" + user.getEmail() + "already exists, please enter another email");
         }
+    }
+
+    public User updateUser(UserDTO userDTO, Principal principal){
+        User user = getUserByPrincipal(principal);
+        user.setName(userDTO.getName());
+        user.setSurname(userDTO.getSurname());
+        user.setEmail(userDTO.getEmail());
+        user.setPhoneNumber(userDTO.getPhoneNumber());
+
+        return userRepository.save(user);
+    }
+
+    public User getCurrentUser(Principal principal){
+        return getUserByPrincipal(principal);
+    }
+
+    private User getUserByPrincipal(Principal principal){
+        String email = principal.getName();
+        return userRepository.findUserByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("Email not found" + email));
     }
 }

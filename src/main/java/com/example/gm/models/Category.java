@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,9 +20,9 @@ public class Category {
     @Column(name = "title")
     private String title;
     @Column(name = "price")
-    private int price;
+    private Integer price;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "idC")
-    private List<Zapis> zapisC = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "category")
+    private List<Zapis> zapisC;
 
 }
