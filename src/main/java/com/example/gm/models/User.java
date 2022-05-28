@@ -55,6 +55,9 @@ public class User implements UserDetails {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     private List<Zapis> zapisU;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "resultU")
+    private List<Result> resultU;
+
     @Override
     public String getPassword() {
         return password;

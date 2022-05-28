@@ -13,8 +13,10 @@ import java.util.Optional;
 public interface ZapisRepository extends JpaRepository<Zapis, Long> {
     Optional<Zapis> findZapisById(Long id);
 
+    List<Zapis> findAllByOrderById();
+
     List<Zapis> findAllByIdU(User user);
     List<Zapis> findByIdC(Category category);
 
-    Optional<Zapis> findZapisByIdAAndUserAndCategory(Long id, User user, Category category);
+    Optional<Zapis> findZapisByIdAndUser(Long id, User user);
 }

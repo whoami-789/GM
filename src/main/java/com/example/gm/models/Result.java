@@ -16,16 +16,15 @@ public class Result {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "name")
-    private String name;
-    @Column(name = "size")
-    private Long size;
-    @Column(name = "contentType")
-    private String contentType;
-    @Lob
-    private byte[] bytes;
+    @Column(name = "result")
+    private String result;
+    @Column(name = "dicom")
+    private String dicom;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Zapis idZ;
+    private Zapis resultZ;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private User resultU;
 
 }

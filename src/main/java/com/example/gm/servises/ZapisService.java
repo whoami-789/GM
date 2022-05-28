@@ -1,6 +1,8 @@
 package com.example.gm.servises;
 
 import com.example.gm.dto.ZapisDTO;
+import com.example.gm.exeptions.CategoryNotFoundException;
+import com.example.gm.exeptions.ZapisNotFoundException;
 import com.example.gm.models.Category;
 import com.example.gm.models.User;
 import com.example.gm.models.Zapis;
@@ -14,6 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.List;
 
 @Service
 public class ZapisService {
@@ -30,19 +33,42 @@ public class ZapisService {
         this.categoryRepository = categoryRepository;
     }
 
-    public Zapis createZapis(ZapisDTO zapisDTO, Principal principal){
+    public Zapis createZapis(ZapisDTO zapisDTO, Principal principal, Long categoryId) {
         User user = getUserByPrincipal(principal);
         Zapis zapis = new Zapis();
+        Category category = categoryRepository.findCategoryById(categoryId)
+                        .orElseThrow(() -> new CategoryNotFoundException("Category not found"));
+        zapis.setCategory(category);
         zapis.setUser(user);
         zapis.setDate(zapisDTO.getDate());
         zapis.setTime(zapisDTO.getTime());
         zapis.setCategory(zapisDTO.getCategory());
 
-        LOG.info("Saving new zapis on this date: {}", zapisDTO.getDate());
+        LOG.info("Saving new zapis: {}", zapisDTO.getId());
         return zapisRepository.save(zapis);
     }
 
-    private User getUserByPrincipal(Principal principal){
+    public List<Zapis> getAllZaps() {
+        return zapisRepository.findAllByOrderById();
+    }
+
+    public Zapis getZapById(Long id, Principal principal) {
+        User user = getUserByPrincipal(principal);
+        return zapisRepository.findZapisByIdAndUser(id, user)
+                .orElseThrow(() -> new ZapisNotFoundException("Zapis cannot be found"));
+    }
+
+    public List<Zapis> getAllZapsForUsers(Principal principal) {
+        User user = getUserByPrincipal(principal);
+        return zapisRepository.findAllByIdU(user);
+    }
+
+    public void deleteZapis(Long id, Principal principal){
+        Zapis zapis = getZapById(id, principal);
+        zapisRepository.delete(zapis);
+    }
+
+    private User getUserByPrincipal(Principal principal) {
         String email = principal.getName();
         return userRepository.findUserByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Email not found" + email));
