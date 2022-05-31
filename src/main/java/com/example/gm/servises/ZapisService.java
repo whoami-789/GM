@@ -60,7 +60,7 @@ public class ZapisService {
 
     public List<Zapis> getAllZapsForUsers(Principal principal) {
         User user = getUserByPrincipal(principal);
-        return zapisRepository.findAllByIdU(user);
+        return zapisRepository.findAllUsersById(user);
     }
 
     public void deleteZapis(Long id, Principal principal){

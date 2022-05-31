@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "dicom")
@@ -18,8 +20,16 @@ public class Dicom {
     private Long id;
     @Column(name = "name")
     private String name;
-    @Lob
-    @Column(columnDefinition = "LONGLOB")
-    private byte[] dicomBytes;
+    @Column(name = "path")
+    private String path;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private User user;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Zapis zapis;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "dicom")
+    private List<Result> result = new ArrayList<>();
 
 }

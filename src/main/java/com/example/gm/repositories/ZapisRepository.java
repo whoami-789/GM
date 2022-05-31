@@ -15,8 +15,8 @@ public interface ZapisRepository extends JpaRepository<Zapis, Long> {
 
     List<Zapis> findAllByOrderById();
 
-    List<Zapis> findAllByIdU(User user);
-    List<Zapis> findByIdC(Category category);
+    List<Zapis> findAllUsersById(User user);
+    List<Zapis> findCategoriesById(Category category);
 
     Optional<Zapis> findZapisByIdAndUser(Long id, User user);
 }

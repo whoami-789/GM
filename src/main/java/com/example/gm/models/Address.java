@@ -5,24 +5,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "category")
+@Table(name = "address")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Category {
+public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "title")
-    private String title;
-    @Column(name = "price")
-    private Integer price;
+    @Column(name = "name")
+    private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "category")
-    private List<Zapis> zapis;
-
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "address")
+    private List<Zapis> zapis = new ArrayList<>();
 }
