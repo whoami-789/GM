@@ -31,7 +31,7 @@ public class AddressService {
         return addressRepository.save(address);
     }
 
-    public List<Address> getAllAddress(){
-        return addressRepository.findAllByName();
+    public List<Address> getAllAddress(String name){
+        return addressRepository.findAllByName(name);
     }
 }

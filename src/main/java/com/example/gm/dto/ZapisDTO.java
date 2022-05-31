@@ -1,6 +1,7 @@
 package com.example.gm.dto;
 
 import com.example.gm.models.Category;
+import com.example.gm.models.User;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
@@ -12,5 +13,9 @@ public class ZapisDTO {
     private String date;
     @NotEmpty
     private String time;
-    private Category category;
+    @NotEmpty
+    private String email;
+    @NotEmpty
+    private String title;
+
 }
