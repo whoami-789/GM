@@ -3,9 +3,11 @@ package com.example.gm.servises;
 import com.example.gm.dto.ZapisDTO;
 import com.example.gm.exeptions.CategoryNotFoundException;
 import com.example.gm.exeptions.ZapisNotFoundException;
+import com.example.gm.models.Address;
 import com.example.gm.models.Category;
 import com.example.gm.models.User;
 import com.example.gm.models.Zapis;
+import com.example.gm.repositories.AddressRepository;
 import com.example.gm.repositories.CategoryRepository;
 import com.example.gm.repositories.UserRepository;
 import com.example.gm.repositories.ZapisRepository;
@@ -25,24 +27,29 @@ public class ZapisService {
     private final ZapisRepository zapisRepository;
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
+    private final AddressRepository addressRepository;
 
     @Autowired
-    public ZapisService(ZapisRepository zapisRepository, UserRepository userRepository, CategoryRepository categoryRepository) {
+    public ZapisService(ZapisRepository zapisRepository, UserRepository userRepository,
+                        CategoryRepository categoryRepository, AddressRepository addressRepository) {
         this.zapisRepository = zapisRepository;
         this.userRepository = userRepository;
         this.categoryRepository = categoryRepository;
+        this.addressRepository = addressRepository;
     }
 
-    public Zapis createZapis(ZapisDTO zapisDTO, Principal principal, Long categoryId) {
+    public Zapis createZapis(ZapisDTO zapisDTO, Principal principal, Long categoryId, Long addressId) {
         User user = getUserByPrincipal(principal);
         Zapis zapis = new Zapis();
         Category category = categoryRepository.findCategoryById(categoryId)
                         .orElseThrow(() -> new CategoryNotFoundException("Category not found"));
+        Address address = addressRepository.findAddressById(addressId)
+                .orElseThrow(() -> new CategoryNotFoundException("Address not found"));
         zapis.setCategory(category);
+        zapis.setAddress(address);
         zapis.setUser(user);
         zapis.setDate(zapisDTO.getDate());
         zapis.setTime(zapisDTO.getTime());
-        zapis.setCategory(zapisDTO.getCategory());
 
         LOG.info("Saving new zapis: {}", zapisDTO.getId());
         return zapisRepository.save(zapis);

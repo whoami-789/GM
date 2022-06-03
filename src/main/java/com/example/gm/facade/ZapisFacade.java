@@ -14,6 +14,7 @@ public class ZapisFacade {
         zapisDTO.setId(zapis.getId());
         zapisDTO.setTime(zapis.getTime());
         zapisDTO.setDate(zapis.getDate());
+        zapisDTO.setAddress(zapis.getAddress().getName());
 
         return zapisDTO;
     }
