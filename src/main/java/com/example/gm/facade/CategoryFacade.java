@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CategoryFacade {
 
-    public CategoryDTO CategoryToCategoryDTO(Category category) {
+    public CategoryDTO categoryToCategoryDTO(Category category) {
         CategoryDTO categoryDTO = new CategoryDTO();
         categoryDTO.setId(category.getId());
         categoryDTO.setTitle(category.getTitle());
