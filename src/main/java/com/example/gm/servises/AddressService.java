@@ -2,6 +2,7 @@ package com.example.gm.servises;
 
 import com.example.gm.dto.AddressDTO;
 import com.example.gm.models.Address;
+import com.example.gm.models.Category;
 import com.example.gm.repositories.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,5 +34,9 @@ public class AddressService {
 
     public List<Address> getAllAddress(String name){
         return addressRepository.findAllByName(name);
+    }
+
+    public List<Address> getAddressByName(String addressName){
+        return addressRepository.findByName(addressName);
     }
 }

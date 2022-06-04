@@ -9,8 +9,8 @@ public class ZapisFacade {
 
     public ZapisDTO zapisToZapisDTO(Zapis zapis){
         ZapisDTO zapisDTO = new ZapisDTO();
-        zapisDTO.setEmail(zapis.getUser().getEmail());
-        zapisDTO.setTitle(zapis.getCategory().getTitle());
+        zapisDTO.setUser(zapis.getUser().getEmail());
+        zapisDTO.setCategory(zapis.getCategory().getTitle());
         zapisDTO.setId(zapis.getId());
         zapisDTO.setTime(zapis.getTime());
         zapisDTO.setDate(zapis.getDate());
