@@ -18,13 +18,13 @@ public class JWTTokenProvider {
     public String generateToken(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
         Date now = new Date(System.currentTimeMillis());
-        Date expiration = new Date(now.getTime() + SecurityConstants.EXPINATION_TIME);
+        Date expiration = new Date(now.getTime() + SecurityConstants.EXPIRATION_TIME);
 
         String userId = Long.toString(user.getId());
 
         Map<String, Object> claimsMap = new HashMap<>();
         claimsMap.put("id", userId);
-        claimsMap.put("username", user.getEmail());
+        claimsMap.put("email", user.getEmail());
         claimsMap.put("name", user.getName());
         claimsMap.put("surname", user.getSurname());
 
@@ -43,7 +43,8 @@ public class JWTTokenProvider {
                     .setSigningKey(SecurityConstants.SECRET)
                     .parseClaimsJws(token);
             return true;
-        } catch (MalformedJwtException |
+        } catch (SignatureException |
+                 MalformedJwtException |
                  ExpiredJwtException |
                  UnsupportedJwtException |
                  IllegalArgumentException ex) {

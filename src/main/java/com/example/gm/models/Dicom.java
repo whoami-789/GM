@@ -11,8 +11,6 @@ import java.util.List;
 @Entity
 @Table(name = "dicom")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Dicom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,10 +22,10 @@ public class Dicom {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Zapis zapis;
-
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "dicom")
     private List<Result> result = new ArrayList<>();
 
+    public void setUser(Long id) {
+        this.id = id;
+    }
 }

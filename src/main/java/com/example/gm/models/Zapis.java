@@ -33,11 +33,5 @@ public class Zapis {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "zapis")
     private List<Result> result = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "zapis")
-    private List<Conclusion> conclusion = new ArrayList<>();
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "zapis")
-    private List<Dicom> dicom = new ArrayList<>();
-
 
 }

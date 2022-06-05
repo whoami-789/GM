@@ -29,4 +29,7 @@ public class Result {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private User user;
 
+    public void setUser(Long id) {
+        this.id = id;
+    }
 }

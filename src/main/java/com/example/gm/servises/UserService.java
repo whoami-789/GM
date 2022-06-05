@@ -51,7 +51,6 @@ public class UserService {
         User user = getUserByPrincipal(principal);
         user.setName(userDTO.getName());
         user.setSurname(userDTO.getSurname());
-        user.setEmail(userDTO.getEmail());
         user.setPhoneNumber(userDTO.getPhoneNumber());
 
         return userRepository.save(user);

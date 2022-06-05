@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/api/category")
 @CrossOrigin
 public class CategoryController {
     @Autowired
