@@ -12,10 +12,11 @@ public class ZapisDTO {
     @NotEmpty
     private String time;
     @NotEmpty
-    private String user;
+    private String name;
     @NotEmpty
-    private String category;
-    private String address;
+    private String lastname;
+    @NotEmpty
+    private Long category;
 
     public ZapisDTO() {
     }

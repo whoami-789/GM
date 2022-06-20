@@ -21,6 +21,6 @@ public class Address {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "address")
-    private List<Zapis> zapis = new ArrayList<>();
+   /* @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "address")
+    private List<Zapis> zapis = new ArrayList<>();*/
 }

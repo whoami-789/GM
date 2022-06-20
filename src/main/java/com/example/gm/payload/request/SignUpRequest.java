@@ -24,7 +24,7 @@ public class SignUpRequest {
     private String name;
 
     @NotEmpty(message = "Please enter your surname")
-    private String surname;
+    private String lastname;
 
     @NotEmpty(message = "Please enter your birth date")
     private String bdate;

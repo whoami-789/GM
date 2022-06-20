@@ -27,8 +27,8 @@ public class Zapis {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Address address;
+ /*   @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Address address;*/
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "zapis")
     private List<Result> result = new ArrayList<>();

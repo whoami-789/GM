@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface ZapisRepository extends JpaRepository<Zapis, Long> {
     Optional<Zapis> findZapisById(Long id);
 
-    List<Zapis> findAllByOrderById();
+    List<Zapis> findAllByOrderByDate();
 
     List<Zapis> findAllUsersById(User user);
     List<Zapis> findCategoriesById(Category category);

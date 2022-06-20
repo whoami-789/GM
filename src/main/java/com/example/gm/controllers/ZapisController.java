@@ -1,6 +1,7 @@
 package com.example.gm.controllers;
 
 import com.example.gm.dto.ZapisDTO;
+import com.example.gm.facade.UserZapisFacade;
 import com.example.gm.facade.ZapisFacade;
 import com.example.gm.models.Address;
 import com.example.gm.models.Category;
@@ -21,12 +22,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("api/zapis")
+@RequestMapping("/api/zapis")
 @CrossOrigin
 public class ZapisController {
 
     @Autowired
     private ZapisFacade zapisFacade;
+    @Autowired
+    private UserZapisFacade userZapisFacade;
     @Autowired
     private ZapisService zapisService;
     @Autowired
@@ -35,12 +38,24 @@ public class ZapisController {
     @PostMapping("/create")
     public ResponseEntity<Object> createZapis(@Valid @RequestBody ZapisDTO zapisDTO,
                                               BindingResult bindingResult,
-                                              Principal principal, Long categoryId, Long addressId){
+                                              Principal principal, Long categoryId){
         ResponseEntity<Object> errors = responseErrorValidation.mapValidationService(bindingResult);
         if (!ObjectUtils.isEmpty(errors)) return errors;
 
-        Zapis zapis = zapisService.createZapis(zapisDTO, principal, categoryId, addressId);
+        Zapis zapis = zapisService.createZapis(zapisDTO, principal, categoryId);
         ZapisDTO createdZapis = zapisFacade.zapisToZapisDTO(zapis);
+
+        return new ResponseEntity<>(createdZapis, HttpStatus.OK);
+    }
+    @PostMapping("/user/create")
+    public ResponseEntity<Object> createUserZapis(@Valid @RequestBody ZapisDTO zapisDTO,
+                                              BindingResult bindingResult,
+                                              Principal principal, Long categoryId){
+        ResponseEntity<Object> errors = responseErrorValidation.mapValidationService(bindingResult);
+        if (!ObjectUtils.isEmpty(errors)) return errors;
+
+        Zapis zapis = zapisService.createZapis(zapisDTO, principal, categoryId);
+        ZapisDTO createdZapis = userZapisFacade.zapisToUserZapisDTO(zapis);
 
         return new ResponseEntity<>(createdZapis, HttpStatus.OK);
     }

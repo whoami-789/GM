@@ -20,8 +20,8 @@ public class User implements UserDetails {
     private Long id;
     @Column(name = "name", nullable = false)
     private String name;
-    @Column(name = "surname", nullable = false)
-    private String surname;
+    @Column(name = "lastname", nullable = false)
+    private String lastname;
     @Column(name = "bdate")
     private String bdate;
     @Column(name = "phoneNumber", unique = true)

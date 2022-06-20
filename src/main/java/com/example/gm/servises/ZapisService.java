@@ -3,11 +3,9 @@ package com.example.gm.servises;
 import com.example.gm.dto.ZapisDTO;
 import com.example.gm.exeptions.CategoryNotFoundException;
 import com.example.gm.exeptions.ZapisNotFoundException;
-import com.example.gm.models.Address;
 import com.example.gm.models.Category;
 import com.example.gm.models.User;
 import com.example.gm.models.Zapis;
-import com.example.gm.repositories.AddressRepository;
 import com.example.gm.repositories.CategoryRepository;
 import com.example.gm.repositories.UserRepository;
 import com.example.gm.repositories.ZapisRepository;
@@ -27,26 +25,36 @@ public class ZapisService {
     private final ZapisRepository zapisRepository;
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
-    private final AddressRepository addressRepository;
 
     @Autowired
     public ZapisService(ZapisRepository zapisRepository, UserRepository userRepository,
-                        CategoryRepository categoryRepository, AddressRepository addressRepository) {
+                        CategoryRepository categoryRepository) {
         this.zapisRepository = zapisRepository;
         this.userRepository = userRepository;
         this.categoryRepository = categoryRepository;
-        this.addressRepository = addressRepository;
     }
 
-    public Zapis createZapis(ZapisDTO zapisDTO, Principal principal, Long categoryId, Long addressId) {
+    public Zapis createZapis(ZapisDTO zapisDTO, Principal principal, Long categoryId) {
         User user = getUserByPrincipal(principal);
         Zapis zapis = new Zapis();
         Category category = categoryRepository.findCategoryById(categoryId)
-                        .orElseThrow(() -> new CategoryNotFoundException("Category not found"));
-        Address address = addressRepository.findAddressById(addressId)
-                .orElseThrow(() -> new CategoryNotFoundException("Address not found"));
+                .orElseThrow(() -> new CategoryNotFoundException("Category not found"));
+
         zapis.setCategory(category);
-        zapis.setAddress(address);
+        zapis.setUser(user);
+        zapis.setDate(zapisDTO.getDate());
+        zapis.setTime(zapisDTO.getTime());
+
+        LOG.info("Saving new zapis: {}", zapisDTO.getId());
+        return zapisRepository.save(zapis);
+    }
+
+    public Zapis createUserZapis(ZapisDTO zapisDTO, Principal principal, Long categoryId) {
+        User user = getUserByPrincipal(principal);
+        Zapis zapis = new Zapis();
+        Category category = categoryRepository.findCategoryById(categoryId)
+                .orElseThrow(() -> new CategoryNotFoundException("Category not found"));
+        zapis.setCategory(category);
         zapis.setUser(user);
         zapis.setDate(zapisDTO.getDate());
         zapis.setTime(zapisDTO.getTime());
@@ -56,7 +64,7 @@ public class ZapisService {
     }
 
     public List<Zapis> getAllZaps() {
-        return zapisRepository.findAllByOrderById();
+        return zapisRepository.findAllByOrderByDate();
     }
 
     public Zapis getZapById(Long id, Principal principal) {
@@ -70,7 +78,7 @@ public class ZapisService {
         return zapisRepository.findAllUsersById(user);
     }
 
-    public void deleteZapis(Long id, Principal principal){
+    public void deleteZapis(Long id, Principal principal) {
         Zapis zapis = getZapById(id, principal);
         zapisRepository.delete(zapis);
     }

@@ -32,12 +32,23 @@ public class CategoryController {
     private ResponseErrorValidation responseErrorValidation;
 
     @PostMapping("/create")
-    public ResponseEntity<Object> createCategory(@Valid@RequestBody CategoryDTO categoryDTO,
+    public ResponseEntity<Object> createCategory(@Valid @RequestBody CategoryDTO categoryDTO,
                                                  BindingResult bindingResult){
         ResponseEntity<Object> errors = responseErrorValidation.mapValidationService(bindingResult);
         if (!ObjectUtils.isEmpty(errors)) return errors;
 
         Category category = categoryService.createCategory(categoryDTO);
+        CategoryDTO createdCategory = categoryFacade.categoryToCategoryDTO(category);
+
+        return new ResponseEntity<>(createdCategory, HttpStatus.OK);
+    }
+    @PostMapping("/update")
+    public ResponseEntity<Object> updateCategory(@Valid @RequestBody CategoryDTO categoryDTO,
+                                                 BindingResult bindingResult){
+        ResponseEntity<Object> errors = responseErrorValidation.mapValidationService(bindingResult);
+        if (!ObjectUtils.isEmpty(errors)) return errors;
+
+        Category category = categoryService.updateCategory(categoryDTO);
         CategoryDTO createdCategory = categoryFacade.categoryToCategoryDTO(category);
 
         return new ResponseEntity<>(createdCategory, HttpStatus.OK);

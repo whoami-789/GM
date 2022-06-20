@@ -62,7 +62,7 @@ public class ResultService {
 
             // Сохранение по этому пути: Этот путь находится в статическом файле в каталоге проекта: (Примечание: этот файл может потребоваться создать самостоятельно)
             // Причиной помещения его в static является то, что он хранит статические файловые ресурсы, то есть адрес локального сервера вводится через браузер, к которому можно получить доступ при добавлении имени файла
-            String path = ClassUtils.getDefaultClassLoader().getResource("").getPath() + "dicom/" + user.getSurname() + user.getName();
+            String path = ClassUtils.getDefaultClassLoader().getResource("").getPath() + "dicom/" + user.getLastname() + user.getName();
             File file = new File(path);
             boolean status = file.exists();
             try {
@@ -98,7 +98,7 @@ public class ResultService {
 
             // Сохранение по этому пути: Этот путь находится в статическом файле в каталоге проекта: (Примечание: этот файл может потребоваться создать самостоятельно)
             // Причиной помещения его в static является то, что он хранит статические файловые ресурсы, то есть адрес локального сервера вводится через браузер, к которому можно получить доступ при добавлении имени файла
-            String path = ClassUtils.getDefaultClassLoader().getResource("").getPath() + "conclusions/" + user.getSurname() + user.getName();
+            String path = ClassUtils.getDefaultClassLoader().getResource("").getPath() + "conclusions/" + user.getLastname() + user.getName();
             File file = new File(path);
             boolean status = file.exists();
 

@@ -32,7 +32,7 @@ public class UserService {
         User user = new User();
         user.setEmail(userIn.getEmail());
         user.setName(userIn.getName());
-        user.setSurname(userIn.getSurname());
+        user.setLastname(userIn.getLastname());
         user.setBdate(userIn.getBdate());
         user.setPhoneNumber(userIn.getPhoneNumber());
         user.setPassword(passwordEncoder.encode(userIn.getPassword()));
@@ -49,8 +49,19 @@ public class UserService {
 
     public User updateUser(UserDTO userDTO, Principal principal){
         User user = getUserByPrincipal(principal);
+        user.setEmail(userDTO.getEmail());
         user.setName(userDTO.getName());
-        user.setSurname(userDTO.getSurname());
+        user.setLastname(userDTO.getLastname());
+        user.setPhoneNumber(userDTO.getPhoneNumber());
+
+        return userRepository.save(user);
+    }
+    public User createnewUser(UserDTO userDTO, Principal principal){
+        User user = getUserByPrincipal(principal);
+        user.setEmail(userDTO.getEmail());
+        user.setName(userDTO.getName());
+        user.setLastname(userDTO.getLastname());
+        user.setBdate(userDTO.getBdate());
         user.setPhoneNumber(userDTO.getPhoneNumber());
 
         return userRepository.save(user);

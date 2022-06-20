@@ -3,6 +3,8 @@ package com.example.gm.controllers;
 import com.example.gm.dto.UserDTO;
 import com.example.gm.facade.UserFacade;
 import com.example.gm.models.User;
+import com.example.gm.payload.request.SignUpRequest;
+import com.example.gm.payload.response.MessageResponse;
 import com.example.gm.servises.UserService;
 import com.example.gm.validators.ResponseErrorValidation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +54,16 @@ public class UserController {
 
         UserDTO userUpdated = userFacade.userToUserDTO(user);
         return new ResponseEntity<>(userUpdated, HttpStatus.OK);
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<Object> registerUser(@Valid @RequestBody UserDTO userDTO, BindingResult bindingResult, Principal principal){
+        ResponseEntity<Object> errors = responseErrorValidation.mapValidationService(bindingResult);
+        if (!ObjectUtils.isEmpty(errors)) return errors;
+
+        User user = userService.createnewUser(userDTO, principal);
+
+        UserDTO userCreated = userFacade.userToUserDTO(user);
+        return new ResponseEntity<>(userCreated, HttpStatus.OK);
     }
 }
